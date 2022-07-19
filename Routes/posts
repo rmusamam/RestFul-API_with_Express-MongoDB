@@ -45,8 +45,31 @@ router.get('/findById/:postId',async(req,res)=>{
         {
             res.json({message:err})
         }
-
+router.delete('/deleteById/:postId',async(req,res)=>{
+    try{
+        const deleteById=await Post.remove({_id: req.params.postId})
+        console.log('object deleted')
+        res.json(deleteById)
+    }
+    catch(err){
+        console.log('error in deleting')
+        res.json({message:err})
+    }
+})
    
+})
+
+
+router.patch('/update/:postId',async(req,res)=>{
+    try{
+        const updateData= await Post.updateOne({_id: req.params.postId},{$set:{title:req.body.title, content:req.body.content}})
+        res.json(updateData)
+        console.log("Document Updated in DB")
+    }
+    catch(err){
+        console.log(err)
+        res.json({message:err})
+    }
 })
 
 
