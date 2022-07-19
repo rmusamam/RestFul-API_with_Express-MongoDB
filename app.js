@@ -3,10 +3,13 @@ const app= express()
 const mongoose= require('mongoose')
 require('dotenv/config')
 route=require('./Routes/posts')
+const bodyParser=require('body-parser')
+
+app.use(bodyParser.json())
 //--when we want to run a function on a activation at Rout
 app.use('/',route)
+
 const url=process.env.DB_connection
-//mongoose.connect(url,{useNewUrlParser:true},()=>console.log('database connected'))
 mongoose.connect(url,{useNewUrlParser:true}).then(()=>console.log('database connected'))
 
 //Routes
