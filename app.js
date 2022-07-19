@@ -2,15 +2,12 @@ const express= require('express')
 const app= express()
 const mongoose= require('mongoose')
 require('dotenv/config')
+route=require('./Routes/posts')
 //--when we want to run a function on a activation at Rout
-// app.use('/',()=>{
-//     console.log('homePage running')
-// })
-//const url='mongodb+srv://rmusamam:ranausama@cluster0.fsilfnm.mongodb.net/?retryWrites=true&w=majority'
-//mongodb+srv://rmusamam:<password>@cluster0.fsilfnm.mongodb.net/test
-//MONGO_URI = 'mongodb+srv://rmusamam:ranausama@cluster0.fsilfnm.mongodb.net/api-crud'
+app.use('/',route)
 const url=process.env.DB_connection
-mongoose.connect(url,{useNewUrlParser:true},()=>console.log('database connected'))
+//mongoose.connect(url,{useNewUrlParser:true},()=>console.log('database connected'))
+mongoose.connect(url,{useNewUrlParser:true}).then(()=>console.log('database connected'))
 
 //Routes
 app.get('/',(req,res)=>{
